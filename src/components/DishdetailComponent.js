@@ -33,13 +33,13 @@ const DishDetail = (props) => {
         return (
             <div className = 'row'>
                 <div className='col-12 col-md-5 m-1"'>
-                <RenderDish dish = {props.dish}/>
+                    <RenderDish dish = {props.dish}/>
                 </div>
                 <div className='col-12 col-md-5 m-1'>
                     <h1>Comments</h1>
                     <ul className='list-unstyled'>
                          <RenderComments comments={props.dish.comments}/>
-                        </ul>
+                    </ul>
                 </div>
             </div> 
         )
