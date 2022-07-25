@@ -21,19 +21,22 @@ class DishDetail extends Component {
     }
 
     renderComments(dish){
-        const comments = dish.comments.map((comment) => {
-            return(
-              
+        if (dish.comments !== null)
+         var comments = dish.comments?.map((comment) => {
+                return(
                 
-                <li key={comment.id}>
-                    <p>{comment.comment}</p>
-                    <p>--{comment.author}, {comment.date}</p>
-                </li>
+                    
+                    <li key={comment.id}>
+                        <p>{comment.comment}</p>
+                        <p>--{comment.author}, {new Intl.DateTimeFormat('en-us', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                    </li>
+                    
+                    
                 
-                
-             
-            )
-        })
+                )
+            })
+        else
+            comments = <div></div>
         return comments
     }
 
