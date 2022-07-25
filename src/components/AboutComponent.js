@@ -11,7 +11,6 @@ function About(props) {
     });
  
     
-    
     function RenderLeader({leader}){
         
         return (
