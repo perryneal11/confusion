@@ -14,6 +14,10 @@ class Main extends Component{
     }
   }
 
+  componentDidMount() {
+    console.log('Main mounted')
+}
+
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId});
 }
