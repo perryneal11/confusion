@@ -9,30 +9,23 @@ class DishDetail extends Component {
 
     renderDish(dish){
         return(
-
             <Card>
                 <CardImg width="100%" src={dish.image} alt={dish.name} />
                     <CardTitle>{dish.name}</CardTitle>
                 {dish.description}
             </Card>
          
-          
         )
     }
 
     renderComments(dish){
         if (dish.comments !== null)
          var comments = dish.comments?.map((comment) => {
-                return(
-                
-                    
+                return(    
                     <li key={comment.id}>
                         <p>{comment.comment}</p>
                         <p>--{comment.author}, {new Intl.DateTimeFormat('en-us', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
-                    </li>
-                    
-                    
-                
+                    </li>             
                 )
             })
         else
