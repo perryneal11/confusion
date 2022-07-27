@@ -20,16 +20,20 @@ import {
 import { NavLink } from "react-router-dom";
 
 class Header extends Component {
+
+  
   constructor(props) {
     super(props);
     this.state = {
       isNavOpen: false,
-      isModalOpen: false,
+      isModalOpen: false
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleLogin = this.handleLogin.bind(this)
   }
+
+  
 
   toggleNav() {
     this.setState({
@@ -38,6 +42,7 @@ class Header extends Component {
   }
 
   toggleModal() {
+    console.log("hit" + this.state.isModalOpen)
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
@@ -92,7 +97,8 @@ class Header extends Component {
               <Nav className="ml-auto" navbar>
                 <NavItem>
                   <Button outline onClick={this.toggleModal}>
-                    <span className="fa fa-sign-in fa-lg"></span>Login
+
+                    <span className="fa fa-sign-in fa-lg"></span> Login
                   </Button>
                 </NavItem>
               </Nav>
@@ -112,7 +118,7 @@ class Header extends Component {
             </div>
           </div>
         </Jumbotron>
-        <Modal fade={false} isOpen={true} toggle={this.toggleModal}>
+        <Modal fade={false} isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.handleLogin}>
