@@ -142,7 +142,7 @@ class Contact extends Component {
                   ></Errors>
                 </Col>
               </Row>
-              <Row className="formg-group">
+              <Row className="form-group">
                 <Label for="lastname" md={2}>
                   Last Name
                 </Label>
