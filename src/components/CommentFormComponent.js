@@ -17,12 +17,19 @@ class CommentForm extends React.Component {
         }
 
         this.toggleModal = this.toggleModal.bind(this)
+        this.handleSubmit= this.handleSubmit.bind(this)
         
     }
 
     toggleModal(){
         this.setState({ modalIsOpen: !this.state.modalIsOpen})
         console.log(this.state.modalIsOpen)
+    }
+
+    handleSubmit(values){
+      this.toggleModal();
+      this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
+
     }
 
   render() {
