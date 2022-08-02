@@ -11,7 +11,6 @@ import CommentForm from "./CommentFormComponent";
 import { Loading } from "./LoadingComponent";
 import {baseURL} from '../shared/baseURL'
 
-
 function RenderDish({ dish }) {
   return (
     <Card>
@@ -22,7 +21,7 @@ function RenderDish({ dish }) {
   );
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
   if (comments != null)
     var comments = comments?.map((comment) => {
       return (
@@ -45,12 +44,13 @@ function RenderComments({ comments, addComment, dishId }) {
   return (
     <div>
       {comments}
-      <CommentForm dishId={dishId} addComment={addComment}></CommentForm>
+      <CommentForm dishId={dishId} postComment={postComment}></CommentForm>
     </div>
   );
 }
 
 const DishDetail = (props) => {
+  console.log(props)
   if (props.isLoading) {
     return (
       <div className="container">
@@ -93,7 +93,7 @@ const DishDetail = (props) => {
             <ul className="list-unstyled">
               <RenderComments
                 comments={props.comments}
-                addComment={props.addComment}
+                postComment={props.postComment}
                 dishId={props.dish.id}
               />
             </ul>
