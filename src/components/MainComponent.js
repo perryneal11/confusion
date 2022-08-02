@@ -46,6 +46,7 @@ class Main extends Component {
 
   render(props) {
     const HomePage = () => {
+      console.log(props)
       return (
         <Home
           dish={

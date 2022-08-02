@@ -12,6 +12,7 @@ import {baseURL} from '../shared/baseURL'
 
 
 function RenderCard({ item, isLoading, errMess }) {
+  console.log(item)
     if (isLoading){
         return(<Loading></Loading>)
     }
