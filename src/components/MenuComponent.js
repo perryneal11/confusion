@@ -9,12 +9,13 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import {baseURL} from '../shared/baseURL'
 
 function RenderMenuItem({ dish, onClick }) {
   return (
     <Card>
       <Link to={`/menu/${dish.id}`}>
-        <CardImg width="100%" src={dish.image} alt={dish.name} />
+        <CardImg width="100%" src={baseURL + dish.image} alt={dish.name} />
         <CardImgOverlay>
           <CardTitle>{dish.name}</CardTitle>
         </CardImgOverlay>
@@ -24,7 +25,8 @@ function RenderMenuItem({ dish, onClick }) {
 }
 
 const Menu = (props) => {
-  const menu = props.dishes.dishes?.map((dish) => {
+  console.log(props)
+  const menu = props.dishes.dishes.map((dish) => {
     return (
       <div key={dish.id} className="col-12 col-md-5 m-1">
         <RenderMenuItem dish={dish}></RenderMenuItem>
@@ -32,7 +34,7 @@ const Menu = (props) => {
     );
   });
 
-  if (props.dishes.isLoading) {
+  if (props.dishes?.isLoading) {
     return (
       <div className="container">
         <div className="row">
@@ -40,7 +42,7 @@ const Menu = (props) => {
         </div>
       </div>
     );
-  } else if (props.dishes.errMess) {
+  } else if (props.dishes?.errMess) {
     <div className="container">
       <div className="row">
         <h4>{props.disehs.errMess}</h4>

@@ -8,8 +8,11 @@ import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import AboutUs from "./AboutComponent";
 import { connect } from "react-redux";
-import { addComment, fetchDishes } from "../redux/ActionCreators";
-import {actions} from 'react-redux-form'
+import { addComment, fetchDishes, fetchComments, fetchPromos } from "../redux/ActionCreators";
+import { actions } from "react-redux-form";
+import {baseURL} from '../shared/baseURL'
+
+
 
 const mapStateToProps = (state) => {
   return {
@@ -20,25 +23,28 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) =>
-    dispatch(addComment(dishId, rating, author, comment)),
-  fetchDishes: () => {
-    dispatch(fetchDishes());
-  },
-  resetFeedbackForm: () => {dispatch(actions.reset('feedback'))}
+const mapDispatchToProps = dispatch => ({
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  fetchDishes: () => { dispatch(fetchDishes())},
+  resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
+  fetchComments: () => dispatch(fetchComments()),
+  fetchPromos: () => dispatch(fetchPromos())
 });
 
 class Main extends Component {
   constructor(props) {
     super(props);
+
   }
 
   componentDidMount() {
+
     this.props.fetchDishes();
+    this.props.fetchComments();
+    this.props.fetchPromos();
   }
 
-  render() {
+  render(props) {
     const HomePage = () => {
       return (
         <Home
@@ -48,10 +54,12 @@ class Main extends Component {
           dishesLoading={this.props.dishes.isLoading}
           dishesErrMess={this.props.dishes.errMess}
           promotion={
-            this.props.promotions.filter(
+            this.props.promotions.promotions.filter(
               (promotion) => promotion.featured == true
             )[0]
           }
+          promosLoading={this.props.promotions.promotions.isLoading}
+          promosErrMess={this.props.promotions.promotions.errMess}
           leader={
             this.props.leaders.filter((leader) => leader.featured == true)[0]
           }
@@ -69,9 +77,10 @@ class Main extends Component {
           }
           isLoading={this.props.dishes.isLoading}
           errMess={this.props.dishes.errMess}
-          comments={this.props.comments.filter(
+          comments={this.props.comments.comments.filter(
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
+          commentsErrMess = {this.props.dishes.dishes.errMess}
           addComment={this.props.addComment}
         />
       );
@@ -88,7 +97,14 @@ class Main extends Component {
             path="/menu"
             component={() => <Menu dishes={this.props.dishes} />}
           />
-          <Route path="/contactus" component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}></Contact>}></Route>
+          <Route
+            path="/contactus"
+            component={() => (
+              <Contact
+                resetFeedbackForm={this.props.resetFeedbackForm}
+              ></Contact>
+            )}
+          ></Route>
           <Route
             path="/aboutus"
             component={() => <AboutUs leaders={this.props.leaders}></AboutUs>}
