@@ -10,14 +10,18 @@ import { Link } from "react-router-dom";
 import CommentForm from "./CommentFormComponent";
 import { Loading } from "./LoadingComponent";
 import {baseURL} from '../shared/baseURL'
+import { FadeTransform, Fade, Stagger} from 'react-animation-components'
 
 function RenderDish({ dish }) {
   return (
+    <FadeTransform in 
+    transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
     <Card>
       <CardImg width="100%" src={baseURL + dish.image} alt={dish.name} />
       <CardTitle>{dish.name}</CardTitle>
       {dish.description}
     </Card>
+    </FadeTransform>
   );
 }
 
