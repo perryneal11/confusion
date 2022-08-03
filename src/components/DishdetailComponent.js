@@ -27,9 +27,11 @@ function RenderDish({ dish }) {
 
 function RenderComments({ comments, postComment, dishId }) {
   if (comments != null)
+ 
     var comments = comments?.map((comment) => {
       return (
         <div>
+
           <li key={comment.id}>
             <p>{comment.comment}</p>
             <p>
